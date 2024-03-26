@@ -1,27 +1,28 @@
 const ccxt = require('ccxt')
+require('dotenv').config()
 let entry
 let stoplossOrder
 let currentPosition
-let wallet = 20
-let LEVERAGE = 10
+let wallet = process.env.WALLET
+let LEVERAGE = process.env.LEVERAGE
 let latestEntryTime
 let hasUpdateThisEntry = true
-const INTERVAL = '1h'
-const SYMBOL = 'ETHUSDT'
-const ITERATION_STEP = 5000
-const START_SAR = 1630.11
-const START_EXTREME = 1677.74
+const INTERVAL = process.env.INTERVAL
+const SYMBOL = process.env
+const ITERATION_STEP =process.env.ITERATION_STEP
+const START_SAR =process.env.START_SAR
+const START_EXTREME =process.env.START_EXTREME
 const IS_RISING = true
-const START_DATE = '2023-03-02T00:00:00.000Z'
-const ACC__START = 0.02
-const ACC_INCR = 0.02
-const ACC_MAX = 0.2
-const STOPLOSS_RATE = 0.1
-const LIQUIDATED_STOPLOSS_RATE = 0.7
+const START_DATE =process.env.START_DATE
+const ACC_START =process.env.ACC_START
+const ACC_INCR =process.env.ACC_INCR
+const ACC_MAX =process.env.ACC_MAX
+const STOPLOSS_RATE =process.env.STOPLOSS_RATE
+const LIQUIDATED_STOPLOSS_RATE =process.env.LIQUIDATED_STOPLOSS_RATE
 
 const binanceusdm = new ccxt.binanceusdm({
-    'apiKey': 'NouLnleEVV4dR6B9sLsYRZEOCRY49cqkILWkYqx699RXvzzjSPUq6fI9i1g3PJ4Z',
-    'secret': '5tbxJ2OgSkMhFWVhxOrIM2j5VqZZLWlTmuTmMgHq1PfWd1If6ADcPuPjsyqpHzJB',
+    'apiKey': process.env.BINANCE_API_KEY,
+    'secret': process.env.BINANCE_SECRET,
 })
 const binance = new ccxt.binanceusdm();
 
@@ -540,7 +541,7 @@ async function calculateParabolicSAR(startSAR = START_SAR, startExtreme=START_EX
     const numDataPoints = highs.length;
     let currentSAR = startSAR
     let currentExtreme = startExtreme
-    let accelerationFactor = ACC__START;
+    let accelerationFactor = ACC_START;
     let isRising = startRising;
   
     for (let i = 1; i < numDataPoints; i++) {
@@ -550,7 +551,7 @@ async function calculateParabolicSAR(startSAR = START_SAR, startExtreme=START_EX
           isRising = false;
           currentSAR = currentExtreme;
           currentExtreme = lows[i]
-          accelerationFactor = ACC__START;
+          accelerationFactor = ACC_START;
         } else {
           if (highs[i] > currentExtreme) {
             currentExtreme = highs[i];
@@ -564,7 +565,7 @@ async function calculateParabolicSAR(startSAR = START_SAR, startExtreme=START_EX
           isRising = true;
           currentSAR = currentExtreme;
           currentExtreme = highs[i]
-          accelerationFactor = ACC__START;
+          accelerationFactor = ACC_START;
         } else {
           if (lows[i] < currentExtreme) {
             currentExtreme = lows[i];

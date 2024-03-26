@@ -1,0 +1,15 @@
+{
+  "name": "binance-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "binance-ichi-sar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Minh Nhat",
+  "license": "ISC",
+  "dependencies": {
+    "ccxt": "^2.1.96",
+    "node-fetch": "^2.6.7"
+  }
+}
