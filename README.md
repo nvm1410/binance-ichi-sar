@@ -83,23 +83,32 @@ The bot will enter a trade when the conversion line lower cut the base line.
 | ------------------------------ | -------------------------------------------------------------------------  |
 
 | WALLET 	| Your initial wallet amount|
+
 | LEVERAGE	| Your leverage|
+
 | INTERVAL	| which chart period you want to use. Recommend: '1h', '4h'|
+
 | ITERATION_STEP | the interval the price update|
 
 Parabolic SAR: this requires you to use TradingView or a similar tool. Visit the chart of your favorite coin, add Parabolic SAR as the indicator. You should specify Acceleration Factor, Acceleration Start and Acceleration Max (this required some back-testing since different coin fit with different numbers. Once you have the numbers, save them in their respective environment variables:
 
 
 | ACC_START | Acceleration Start|
+
 | ACC_INCR | Acceleration Factor|
+
 | ACC_MAX | Acceleration Max|
 
 In TradingView, from the most recent candle, backtrack until you meet a parabolic SAR pivot point from down to up (where the previous SAR point is higher than it's closing price, but the point you want is lower than it's closing price). Note down these stats in your .env file also: 
 
 | START_DATE | The date the pivot happened, in ISO string|
+
 | START_SAR | SAR point at that day|
+
 | START_EXTREME | The highest price of the pivot candle|
+
 | STOPLOSS_RATE | Your maximum stoploss price per trade|
+
 | LIQUIDATED_STOPLOSS_RATE | Maximum stoploss price for your account|
 
   
